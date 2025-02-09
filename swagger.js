@@ -1,16 +1,16 @@
 const swaggerAutogen = require('swagger-autogen')();
 const dotenv = require('dotenv');
 dotenv.config();
-const port = process.env.PORT
-const host = process.env.HOST
+// const port = process.env.PORT
+// const host = process.env.HOST
 
 const doc = {
   info: {
     title: 'Quilt API',
     description: 'API for Quilt',
   },
-  host: `${host}:${port}`,
-  // host: 'cse341-code-student-ccpz.onrender.com',
+  // host: `${host}:${port}`,
+  host: 'quilt-api.onrender.com',
   schemes: ['http', 'https'],
 };
 
