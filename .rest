@@ -5,7 +5,7 @@
 GET {{host}}/quilts HTTP/1.1
 
 ###
-GET {{host}}/quilts/67a7be1b7f25a926bae20f17 HTTP/1.1
+GET {{host}}/quilts/67a82e2adb32c31a19a8f7dc HTTP/1.1
 
 ###
 POST {{host}}/quilts HTTP/1.1
@@ -25,7 +25,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{host}}/quilts/67a7dcecc2446b3e2b972ec9 HTTP/1.1
+PUT {{host}}/quilts/67a82e2adb32c31a19a8f7dc HTTP/1.1
 Content-Type: application/json
 
 {
@@ -33,5 +33,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{host}}/quilts/67a7dcecc2446b3e2b972ec9 HTTP/1.1
+DELETE {{host}}/quilts/67a82e2adb32c31a19a8f7dc HTTP/1.1
 Content-Type: application/json
