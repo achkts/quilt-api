@@ -1,0 +1,152 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Quilt API",
+    "description": "API for Quilt",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/quilts/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Quilt data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "The Seven Sisters"
+                },
+                "yearCreated": {
+                  "type": "string",
+                  "example": "1982"
+                },
+                "size": {
+                  "type": "string",
+                  "example": "7x7"
+                },
+                "imageURL": {
+                  "type": "string",
+                  "example": "images/sevenSisters.jpg"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "This quilt was made in honor of my six sisters and I. Each sister has a different favorite color, so I made a block for each sister in her favorite color. The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show."
+                },
+                "quiltType": {
+                  "type": "string",
+                  "example": "Handstitched"
+                },
+                "awards": {
+                  "type": "string",
+                  "example": "honorable mention and first place"
+                },
+                "quiltShow": {
+                  "type": "string",
+                  "example": "Washington County Fair 1982 and Utah County Historical Society 2005"
+                },
+                "price": {
+                  "type": "string",
+                  "example": "not for sale"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "unavailable"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/quilts/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
