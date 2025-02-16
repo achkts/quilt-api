@@ -1,5 +1,5 @@
-# @host = https://quilt-api.onrender.com
-@host = http://localhost:8080
+@host = https://quilt-api.onrender.com
+# @host = http://localhost:8080
 
 
 GET {{host}}/quilts HTTP/1.1
