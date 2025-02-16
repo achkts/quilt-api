@@ -23,9 +23,65 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Quilt data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "The Seven Sisters"
+                },
+                "yearCreated": {
+                  "type": "string",
+                  "example": "1982"
+                },
+                "size": {
+                  "type": "string",
+                  "example": "7x7"
+                },
+                "imageURL": {
+                  "type": "string",
+                  "example": "images/sevenSisters.jpg"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "This quilt was made in honor of my six sisters and I. Each sister has a different favorite color, so I made a block for each sister in her favorite color. The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show."
+                },
+                "quiltType": {
+                  "type": "string",
+                  "example": "Handstitched"
+                },
+                "awards": {
+                  "type": "string",
+                  "example": "honorable mention and first place"
+                },
+                "quiltShow": {
+                  "type": "string",
+                  "example": "Washington County Fair 1982 and Utah County Historical Society 2005"
+                },
+                "price": {
+                  "type": "string",
+                  "example": "not for sale"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "unavailable"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -55,11 +111,68 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Quilt data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "The Seven Sisters"
+                },
+                "yearCreated": {
+                  "type": "string",
+                  "example": "1982"
+                },
+                "size": {
+                  "type": "string",
+                  "example": "7x7"
+                },
+                "imageURL": {
+                  "type": "string",
+                  "example": "images/sevenSisters.jpg"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "This quilt was made in honor of my six sisters and I. Each sister has a different favorite color, so I made a block for each sister in her favorite color. The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show."
+                },
+                "quiltType": {
+                  "type": "string",
+                  "example": "Handstitched"
+                },
+                "awards": {
+                  "type": "string",
+                  "example": "honorable mention and first place"
+                },
+                "quiltShow": {
+                  "type": "string",
+                  "example": "Washington County Fair 1982 and Utah County Historical Society 2005"
+                },
+                "price": {
+                  "type": "string",
+                  "example": "not for sale"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "unavailable"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },

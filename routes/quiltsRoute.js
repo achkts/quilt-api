@@ -5,8 +5,8 @@ const utilities = require('../utilities');
 routes.get('/quilts/', utilities.handleErrors(quiltsController.getQuilts));
 routes.get('/quilts/:id', utilities.handleErrors(quiltsController.getSingleQuiltById));
 
-routes.post('/quilts/', utilities.handleErrors(quiltsController.createQuilt));
-routes.put('/quilts/:id', utilities.handleErrors(quiltsController.updateQuilt));
+routes.post('/quilts/', quiltsController.createQuilt);
+routes.put('/quilts/:id', quiltsController.updateQuilt);
 routes.delete('/quilts/:id', utilities.handleErrors(quiltsController.deleteQuilt));
 
 

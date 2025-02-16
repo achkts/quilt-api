@@ -4,6 +4,7 @@ const quiltModel = require("../models/quiltModel");
 
 const getQuilts = async (req, res) => {
      const allQuiltsCollection = await quiltModel.find({}).exec();
+     console.log("where are the quilts", allQuiltsCollection);
      res.json(allQuiltsCollection);
 }
 
@@ -15,14 +16,13 @@ const getSingleQuiltById = async (req, res) => {
 }
 
 
-const createQuilt = async (req, res) => {  
-    const quiltsJson = req.body;
+const createQuilt = async (req, res) => {
     /* #swagger.parameters['body'] = {
         in: 'body',
         description: 'Quilt data',
         required: true,
         schema: {
-            $name : "The Seven Sisters",
+            "name" : "The Seven Sisters",
             "yearCreated" : "1982",
             "size" : "7x7",
             "imageURL" : "images/sevenSisters.jpg",
@@ -34,7 +34,7 @@ const createQuilt = async (req, res) => {
             "status" : "unavailable"
         }
     } */
-  
+    const quiltsJson = req.body;
     
     try {
         const newQuilt = new quiltModel(quiltsJson);
@@ -52,31 +52,25 @@ const createQuilt = async (req, res) => {
     }
 }
 
-const updateQuilt = async (req, res) => { 
-    const quiltsJson = req.body;
-    /* #swagger.requestBody = {
+const updateQuilt = async (req, res) => {
+    /* #swagger.parameters['body'] = {
         in: 'body',
         description: 'Quilt data',
         required: true,
-        content: {
-            "application/json": {
-                schema: {
-                    "name" : "The Seven Sisters",
-                    "yearCreated" : "1982",
-                    "size" : "7x7",
-                    "imageURL" : "images/sevenSisters.jpg",
-                    "description" : "This quilt was made in honor of my six sisters and I.  Each sister has a different favorite color, so I made a block for each sister in her favorite color.  The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show.",
-                    "quiltType" : "Handstitched",
-                    "awards" : "honorable mention and first place",
-                    "quiltShow" : "Washington County Fair 1982 and Utah County Historical Society 2005",
-                    "price" : "not for sale",
-                    "status" : "unavailable"
-                }
-            }   
+        schema: {
+            "name" : "The Seven Sisters",
+            "yearCreated" : "1982",
+            "size" : "7x7",
+            "imageURL" : "images/sevenSisters.jpg",
+            "description" : "This quilt was made in honor of my six sisters and I.  Each sister has a different favorite color, so I made a block for each sister in her favorite color.  The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show.",
+            "quiltType" : "Handstitched",
+            "awards" : "honorable mention and first place",
+            "quiltShow" : "Washington County Fair 1982 and Utah County Historical Society 2005",
+            "price" : "not for sale",
+            "status" : "unavailable"
         }
-        
     } */
-   
+    const quiltsJson = req.body;
     const id = req.params.id;
     try {
         const filter = { _id: new ObjectId(id) };
