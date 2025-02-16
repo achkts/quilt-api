@@ -74,7 +74,7 @@ const updateQuilt = async (req, res) => {
     const id = req.params.id;
     try {
         const filter = { _id: new ObjectId(id) };
-        const result = await quiltModel.updateOne(filter, quiltsJson);
+        const result = await quiltModel.updateOne(filter, quiltsJson, {runValidators: true});
        
         
         if (result.matchedCount === 0) {
