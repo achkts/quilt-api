@@ -8,7 +8,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
-
   },
   "keywords": [],
   "author": "",
@@ -22,6 +21,7 @@
     "mongodb": "^6.13.0",
     "mongoose": "^8.9.6",
     "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {

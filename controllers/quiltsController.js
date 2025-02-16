@@ -1,43 +1,28 @@
 const { ObjectId } = require("mongodb");
-const mongoDB = require("./mongodb");
+const quiltModel = require("../models/quiltModel");
 
 
 const getQuilts = async (req, res) => {
-     const myQuiltsCollection = await mongoDB.getClient();
-     const projection = { _id: 1, name: 1, yearCreated: 1, size: 1, imageURL: 1, description: 1, quiltType: 1, awards: 1, quiltShow: 1, price: 1, status: 1 };
-        const cursor = myQuiltsCollection.find().project(projection);
-        const results = [];
-        for await (const doc of cursor) {
-            results.push(doc);
-            
-        }
-        res.json(results);
+     const allQuiltsCollection = await quiltModel.find({}).exec();
+     res.json(allQuiltsCollection);
 }
 
 const getSingleQuiltById = async (req, res) => {
     const id = req.params.id;
-    const myQuiltsCollection = await mongoDB.getClient();
-    const options = {
-        projection: { _id: 0, name: 1, yearCreated:1 },
-    };
+    const singleQuilt = await await quiltModel.findById(id);
 
-  const findResult = await myQuiltsCollection.findOne({_id: new ObjectId(id)}, options);
-  res.json(findResult);
-  console.log(id, findResult)
+    res.json(singleQuilt);
 }
 
-const requireField = (obj, fieldName) => {
-    if(obj[fieldName] == undefined) throw new Error(fieldName+ ' is required.');
-}
 
-const createQuilt = async (req, res) => {
+const createQuilt = async (req, res) => {  
     const quiltsJson = req.body;
     /* #swagger.parameters['body'] = {
         in: 'body',
         description: 'Quilt data',
         required: true,
         schema: {
-            "name" : "The Seven Sisters",
+            $name : "The Seven Sisters",
             "yearCreated" : "1982",
             "size" : "7x7",
             "imageURL" : "images/sevenSisters.jpg",
@@ -49,55 +34,54 @@ const createQuilt = async (req, res) => {
             "status" : "unavailable"
         }
     } */
-    try {
-        requireField(quiltsJson, 'name');
-        requireField(quiltsJson, 'yearCreated');
-        requireField(quiltsJson, 'size');
-        requireField(quiltsJson, 'imageURL');
-        requireField(quiltsJson, 'description');
-        requireField(quiltsJson, 'quiltType');
-        requireField(quiltsJson, 'awards');
-        requireField(quiltsJson, 'quiltShow');
-        requireField(quiltsJson, 'price');
-        requireField(quiltsJson, 'status');
-
-        const myQuiltsCollection = await mongoDB.getClient();
-        const result = await myQuiltsCollection.insertOne(quiltsJson)
+  
     
+    try {
+        const newQuilt = new quiltModel(quiltsJson);
+        const result = await newQuilt.save();
+        console.log('created', result)
 
-        res.status(201).send(result.insertedId)
+        res.status(201).send(result._id)
 
     } catch(e) {
-        res.send(e.message);
+        const messages = [];
+        for(const key in e.errors) {
+            messages.push(e.errors[key].message);
+        }
+        res.status(400).json(messages);
     }
 }
 
-const updateQuilt = async (req, res) => {
-    /* #swagger.parameters['body'] = {
+const updateQuilt = async (req, res) => { 
+    const quiltsJson = req.body;
+    /* #swagger.requestBody = {
         in: 'body',
         description: 'Quilt data',
         required: true,
-        schema: {
-            "name" : "The Seven Sisters",
-            "yearCreated" : "1982",
-            "size" : "7x7",
-            "imageURL" : "images/sevenSisters.jpg",
-            "description" : "This quilt was made in honor of my six sisters and I.  Each sister has a different favorite color, so I made a block for each sister in her favorite color.  The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show.",
-            "quiltType" : "Handstitched",
-            "awards" : "honorable mention and first place",
-            "quiltShow" : "Washington County Fair 1982 and Utah County Historical Society 2005",
-            "price" : "not for sale",
-            "status" : "unavailable"
+        content: {
+            "application/json": {
+                schema: {
+                    "name" : "The Seven Sisters",
+                    "yearCreated" : "1982",
+                    "size" : "7x7",
+                    "imageURL" : "images/sevenSisters.jpg",
+                    "description" : "This quilt was made in honor of my six sisters and I.  Each sister has a different favorite color, so I made a block for each sister in her favorite color.  The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show.",
+                    "quiltType" : "Handstitched",
+                    "awards" : "honorable mention and first place",
+                    "quiltShow" : "Washington County Fair 1982 and Utah County Historical Society 2005",
+                    "price" : "not for sale",
+                    "status" : "unavailable"
+                }
+            }   
         }
+        
     } */
-    const contactJson = req.body;
+   
     const id = req.params.id;
     try {
-        const myQuiltsCollection = await mongoDB.getClient();
-        const result = await myQuiltsCollection.updateOne(
-            { _id: new ObjectId(id) },
-            { $set: contactJson }
-        );
+        const filter = { _id: new ObjectId(id) };
+        const result = await quiltModel.updateOne(filter, quiltsJson);
+       
         
         if (result.matchedCount === 0) {
             return res.status(404).json({ message: "Quilt not found" });
@@ -113,13 +97,11 @@ const updateQuilt = async (req, res) => {
 const deleteQuilt = async (req, res) => {
     const id = req.params.id;
     try {
-        const myQuiltsCollection = await mongoDB.getClient();
-        const result = await myQuiltsCollection.deleteOne(
-            { _id: new ObjectId(id) }
-        );
-        
+        const filter = { _id: new ObjectId(id) };
+        const result = await quiltModel.deleteOne(filter);
+    
         if (result.deletedCount === 0) {
-            return res.status(404).json({ message: "Contact not found" });
+            return res.status(404).json({ message: "Quilt not found" });
         }
        
         res.status(204).json({ message: "Delete successful", result });

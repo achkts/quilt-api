@@ -8,6 +8,7 @@ dotenv.config();
 
 
 const app = express();
+
 const quiltsRoute = require('./routes/quiltsRoute');
 
 
@@ -18,6 +19,8 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
+
+
 
 app
   .use(bodyParser.json())
@@ -32,4 +35,20 @@ app
   .use('/', quiltsRoute);
 
 
+//swagger docs
+app.get('/', function(req, res, next) {
+  res.redirect('/api-docs')
+});
 
+app.use(async (req, res, next) => {
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+})
+
+app.use(async (err, req, res, next) => {
+  
+  let message = '';
+  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  res.status(err.status || 500).json({
+    message: message
+  })
+})
