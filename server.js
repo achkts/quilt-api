@@ -1,5 +1,8 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger.json');
 
@@ -10,7 +13,7 @@ dotenv.config();
 const app = express();
 
 const quiltsRoute = require('./routes/quiltsRoute');
-
+const authRoutes = require('./routes/authRoutes');
 
 const port = process.env.PORT
 const host = process.env.HOST
@@ -32,7 +35,12 @@ app
     next();
   })
 
-  .use('/', quiltsRoute);
+  .use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }))
+  .use(passport.initialize())
+  .use(passport.session())
+
+  .use('/', quiltsRoute)
+  .use('/', authRoutes);
 
 
 //swagger docs
