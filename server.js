@@ -1,14 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger.json');
-
-const dotenv = require('dotenv');
-dotenv.config();
-
 
 const app = express();
 
@@ -40,7 +37,7 @@ app
   .use(passport.session())
 
   .use('/', quiltsRoute)
-  .use('/', authRoutes);
+  .use('/auth', authRoutes);
 
 
 //swagger docs
@@ -53,7 +50,7 @@ app.use(async (req, res, next) => {
 })
 
 app.use(async (err, req, res, next) => {
-  
+  console.log('Error handler: ', err);
   let message = '';
   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.status(err.status || 500).json({

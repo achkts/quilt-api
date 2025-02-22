@@ -1,13 +1,47 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: '/auth/google/callback',
+    },
+    (accessToken, refreshToken, profile, done) => {
+        console.log('callback', accessToken, refreshToken, profile)
+      // Code to handle user authentication and retrieval
+      done(null, {name: profile.displayName, email: profile.emails[0].value});
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  // Code to serialize user data
+  console.log('serialize', user);
+  done(null, user);
+});
+
+passport.deserializeUser((id, done) => {
+  // Code to deserialize user data
+  console.log('deserializeUser', id);
+  done(null, {name: id, email: id});
+});
+
+router.get('/test', (req, res) => {
+  res.send('Auth route working');
+});
 
 // Initiates the Google OAuth 2.0 authentication flow
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Callback URL for handling the OAuth 2.0 response
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
   // Successful authentication, redirect or handle the user as desired
+    console.log('success login')
+    // res.send('success login');
   res.redirect('/');
 });
 
