@@ -1,5 +1,5 @@
-@host = https://quilt-api.onrender.com
-# @host = http://localhost:8080
+# @host = https://quilt-api.onrender.com
+@host = http://localhost:8080
 
 
 GET {{host}}/quilts HTTP/1.1
@@ -29,9 +29,17 @@ PUT {{host}}/quilts/67a7be1b7f25a926bae20f17 HTTP/1.1
 Content-Type: application/json
 
 {
-    "name" : "ghhhhhhhhhhhhhhhuyuygiuyguygiuygiuygyugiuyguyigyuigniuyguyignyiugnuiygnuygniuygniuygniuygniuygniugyiugyiuygniuygnugugiugniuygniuygniugyiuy"
+    "name" : "Starshine"
 }
 
 ###
 DELETE {{host}}/quilts/67a7be1b7f25a926bae20f17 HTTP/1.1
 Content-Type: application/json
+
+###
+GET {{host}}/quilters HTTP/1.1
+
+###
+GET {{host}}/protected HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDA3OTgsImV4cCI6MTc0MDg0NDM5OH0.DxDHZg8Lonb2QcaIIvB7_M7O9anBFEYJMGgppk1L2a8
+

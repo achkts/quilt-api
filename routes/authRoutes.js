@@ -1,7 +1,11 @@
 const express = require('express');
 const passport = require('passport');
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 passport.use(
   new GoogleStrategy(
@@ -42,8 +46,12 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
   // Successful authentication, redirect or handle the user as desired
     console.log('success login')
     // res.send('success login');
-  res.redirect('/');
+    console.log('what is the user?',req)
+    const token = jwt.sign({ username: req.user.email }, SECRET_KEY, { expiresIn: '1h' });
+    res.json({ message: 'Login successful', token });
 });
+
+
 
 // Logout route
 router.get('/logout', (req, res) => {

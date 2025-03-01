@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger.json');
+const { authenticateToken } = require('./utilities');
 
 const app = express();
 
@@ -45,6 +46,10 @@ app.get('/', function(req, res, next) {
   res.redirect('/api-docs')
 });
 
+app.get('/protected', authenticateToken, (req, res) => {
+  res.json({ message: 'This is a protected route', user: req.user });
+});
+
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
@@ -57,3 +62,5 @@ app.use(async (err, req, res, next) => {
     message: message
   })
 })
+
+

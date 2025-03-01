@@ -1,7 +1,9 @@
 const { ObjectId } = require("mongodb");
 const quiltModel = require("../models/quiltModel");
+const quiltersModel = require("../models/quiltersModel");
 
 
+//Quilts Collection
 const getQuilts = async (req, res) => {
      const allQuiltsCollection = await quiltModel.find({}).exec();
      console.log("where are the quilts", allQuiltsCollection);
@@ -105,4 +107,14 @@ const deleteQuilt = async (req, res) => {
     }
     
 };
-module.exports = { getQuilts, getSingleQuiltById, createQuilt, updateQuilt, deleteQuilt };
+
+//Quilters Collection
+const getQuilters = async (req, res) => {
+    const allQuiltersCollection = await quiltersModel.find({}).exec();
+    console.log("where are the quilters", allQuiltersCollection);
+    res.json(allQuiltersCollection);
+}
+
+
+
+module.exports = { getQuilts, getSingleQuiltById, createQuilt, updateQuilt, deleteQuilt, getQuilters };
