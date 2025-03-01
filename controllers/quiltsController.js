@@ -3,6 +3,7 @@ const quiltModel = require("../models/quiltModel");
 const quiltersModel = require("../models/quiltersModel");
 
 
+
 //Quilts Collection
 const getQuilts = async (req, res) => {
      const allQuiltsCollection = await quiltModel.find({}).exec();
@@ -115,6 +116,95 @@ const getQuilters = async (req, res) => {
     res.json(allQuiltersCollection);
 }
 
+const getSingleQuilterById = async (req, res) => {
+    const id = req.params.id;
+    const singleQuilter = await quiltersModel.findById(id);
 
+    res.json(singleQuilter);
+}
 
-module.exports = { getQuilts, getSingleQuiltById, createQuilt, updateQuilt, deleteQuilt, getQuilters };
+const createQuilter = async (req, res) => {
+    /* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Quilter data',
+        required: true,
+        schema: {
+            "fname" : "Margaret",
+            "lname" : "Davis",
+            "email" : "mdquilts@juno.com",
+            "experience" : "advanced",
+            "residentCity" : "Des Moines",
+            "residentState" : "Iowa",
+           
+        }
+    } */
+    const quiltersJson = req.body;
+    
+    try {
+        const newQuilter = new quiltersModel(quiltersJson);
+        const result = await newQuilter.save();
+        console.log('created', result)
+
+        res.status(201).send(result._id)
+
+    } catch(e) {
+        const messages = [];
+        for(const key in e.errors) {
+            messages.push(e.errors[key].message);
+        }
+        res.status(400).json(messages);
+    }
+}
+
+const updateQuilter = async (req, res) => {
+    /* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Quilter data',
+        required: true,
+        schema: {
+            "fname" : "The Seven Sisters",
+            "lname" : "1982",
+            "email" : "7x7",
+            "experience" : "images/sevenSisters.jpg",
+            "residentCity" : "This quilt was made in honor of my six sisters and I.  Each sister has a different favorite color, so I made a block for each sister in her favorite color.  The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show.",
+            "residentState" : "Handstitched",
+           
+        }
+    } */
+    const quiltersJson = req.body;
+    const id = req.params.id;
+    try {
+        const filter = { _id: new ObjectId(id) };
+        const result = await quiltersModel.updateOne(filter, quiltersJson, {runValidators: true});
+       
+        
+        if (result.matchedCount === 0) {
+            return res.status(404).json({ message: "Quilter not found" });
+        }
+    
+        res.status(200).json({ message: "Update successful", result });
+
+    } catch(e) {
+        res.status(500).send(e.message);
+    }
+};
+
+const deleteQuilter = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const filter = { _id: new ObjectId(id) };
+        const result = await quiltersModel.deleteOne(filter);
+    
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: "Quilter not found" });
+        }
+       
+        res.status(204).json({ message: "Delete successful", result });
+
+    } catch(e) {
+        res.status(500).send(e.message);
+    }
+    
+};
+
+module.exports = { getQuilts, getSingleQuiltById, createQuilt, updateQuilt, deleteQuilt, getQuilters, getSingleQuilterById, createQuilter, updateQuilter, deleteQuilter };

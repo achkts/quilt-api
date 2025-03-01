@@ -259,6 +259,183 @@
             "description": "Forbidden"
           }
         }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Quilter data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fname": {
+                  "type": "string",
+                  "example": "Margaret"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Davis"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "mdquilts@juno.com"
+                },
+                "experience": {
+                  "type": "string",
+                  "example": "advanced"
+                },
+                "residentCity": {
+                  "type": "string",
+                  "example": "Des Moines"
+                },
+                "residentState": {
+                  "type": "string",
+                  "example": "Iowa"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/quilters/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Quilter data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fname": {
+                  "type": "string",
+                  "example": "The Seven Sisters"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "1982"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "7x7"
+                },
+                "experience": {
+                  "type": "string",
+                  "example": "images/sevenSisters.jpg"
+                },
+                "residentCity": {
+                  "type": "string",
+                  "example": "This quilt was made in honor of my six sisters and I. Each sister has a different favorite color, so I made a block for each sister in her favorite color. The quilt is hand-stitched and was awarded first place at the Utah County Historical Society 2005 quilt show."
+                },
+                "residentState": {
+                  "type": "string",
+                  "example": "Handstitched"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
       }
     }
   }

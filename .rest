@@ -9,7 +9,7 @@ GET {{host}}/quilts/67b161657486e033d052878a HTTP/1.1
 
 ###
 POST {{host}}/quilts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDA3OTgsImV4cCI6MTc0MDg0NDM5OH0.DxDHZg8Lonb2QcaIIvB7_M7O9anBFEYJMGgppk1L2a8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDU2NjcsImV4cCI6MTc0MDg0OTI2N30.AODm_qRq1K3vkF8Hb0gAqqLZ9l-gqSWGHGAhoEbGOk0
 Content-Type: application/json
 
 {
@@ -26,23 +26,54 @@ Content-Type: application/json
 }
 
 ###
-PUT {{host}}/quilts/67c32708e15994b76e94bf43 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDA3OTgsImV4cCI6MTc0MDg0NDM5OH0.DxDHZg8Lonb2QcaIIvB7_M7O9anBFEYJMGgppk1L2a8
+PUT {{host}}/quilts/67b161657486e033d052878a HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDU2NjcsImV4cCI6MTc0MDg0OTI2N30.AODm_qRq1K3vkF8Hb0gAqqLZ9l-gqSWGHGAhoEbGOk0
 Content-Type: application/json
 
 {
-    "name" : "Starshine"
+    "name" : "ElizabethTown"
 }
 
 ###
-DELETE {{host}}/quilts/67c325fb06ee9037f1c8ff52 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDA3OTgsImV4cCI6MTc0MDg0NDM5OH0.DxDHZg8Lonb2QcaIIvB7_M7O9anBFEYJMGgppk1L2a8
+DELETE {{host}}/quilts/67c332cbd01c7d58bc28dd52 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDU2NjcsImV4cCI6MTc0MDg0OTI2N30.AODm_qRq1K3vkF8Hb0gAqqLZ9l-gqSWGHGAhoEbGOk0
 Content-Type: application/json
 
 ###
 GET {{host}}/quilters HTTP/1.1
 
 ###
+GET {{host}}/quilters/67c33459d01c7d58bc28dd5c HTTP/1.1
+
+###
+POST {{host}}/quilters HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDU2NjcsImV4cCI6MTc0MDg0OTI2N30.AODm_qRq1K3vkF8Hb0gAqqLZ9l-gqSWGHGAhoEbGOk0
+Content-Type: application/json
+
+{
+    "fname": "Tara", 
+    "lname": "Clayton",
+    "email": "earthquilts@skysail.com",
+    "experience" : "intermediate",
+    "residentCity" : "Sonoma",
+    "residentState" : "New Mexico"
+}
+
+###
+PUT {{host}}/quilters/67c33459d01c7d58bc28dd5c HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDU2NjcsImV4cCI6MTc0MDg0OTI2N30.AODm_qRq1K3vkF8Hb0gAqqLZ9l-gqSWGHGAhoEbGOk0
+Content-Type: application/json
+
+{
+  
+    "residentState" : "California"
+}
+
+###
+DELETE {{host}}/quilters/67c325fb06ee9037f1c8ff52 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDU2NjcsImV4cCI6MTc0MDg0OTI2N30.AODm_qRq1K3vkF8Hb0gAqqLZ9l-gqSWGHGAhoEbGOk0
+
+###
 GET {{host}}/protected HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDA3OTgsImV4cCI6MTc0MDg0NDM5OH0.DxDHZg8Lonb2QcaIIvB7_M7O9anBFEYJMGgppk1L2a8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImF1ZHJleWNoZWNrZXR0c0BnbWFpbC5jb20iLCJpYXQiOjE3NDA4NDU2NjcsImV4cCI6MTc0MDg0OTI2N30.AODm_qRq1K3vkF8Hb0gAqqLZ9l-gqSWGHGAhoEbGOk0
 
