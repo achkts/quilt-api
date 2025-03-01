@@ -11,7 +11,7 @@ const doc = {
   },
   // host: `${host}:${port}`,
   host: 'quilt-api.onrender.com',
-  // schemes: ['http', 'https'],
+  schemes: ['http', 'https'],
 };
 
 const outputFile = './swagger.json';
