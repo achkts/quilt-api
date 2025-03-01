@@ -5,7 +5,10 @@
     "description": "API for Quilt",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": [
+    "localhost:8080", 
+    "quilts-api.render.com"
+  ],
   "basePath": "/",
   "schemes": [
     "http",
