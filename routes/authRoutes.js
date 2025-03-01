@@ -1,6 +1,5 @@
 const express = require('express');
 const passport = require('passport');
-const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
